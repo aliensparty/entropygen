@@ -1,22 +1,47 @@
-local wordbank = require("wordbank")
+math.randomseed(os.time())
 
 local passwordCount
-local wordCount
-local rand
 local password
+
+local function readLineFromFile(filename, wantedLine)
+    local file = io.open(filename, 'r')
+    local currentLine = 0
+    local lineText = nil
+
+    for line in file:lines() do
+        currentLine = currentLine + 1
+        if wantedLine == currentLine then
+            lineText = line
+            break
+        end
+    end
+
+    file:close()
+    return lineText
+end
 
 print("entropygen: the world's worst password generator\n")
 print("how many passwords will you like to generate? (minimum 1)")
 passwordCount = tonumber(io.read())
-print("how many words shall each password generate? (aim for 5-10)")
-wordCount = tonumber(io.read())
 
-for passwords = 1, passwordCount do
-    rand = math.random(1, 983)
-    password = wordbank[rand]
-    for words = 2, wordCount do -- first word genned lol
-        rand = math.random(1, 983)
-        password = password .. "-" .. wordbank[rand]
+for i = 1, passwordCount do
+    password = ""
+    local subject = readLineFromFile("wordbank/adjectives.txt", math.random(1, 1347)) .. "-" .. readLineFromFile("wordbank/nouns.txt", math.random(1, 1525))
+    local verb = readLineFromFile("wordbank/adverbs.txt", math.random(1, 10000)) .. "-" .. readLineFromFile("wordbank/verbs.txt", math.random(1, 9999))
+    local object = readLineFromFile("wordbank/nouns.txt", math.random(1, 1525))
+
+    local words = {subject, verb, object}
+
+    for i = 1, #words do
+        local choice = math.random(1, #words)
+        local word = table.remove(words, choice)
+
+        if i == 1 then
+            password = password .. word
+        else
+            password = password .. "-" .. word
+        end
     end
-    print("password " .. passwords .. ": " .. password)
+
+    print("password " .. i .. ": " .. password:gsub("^%l", string.upper) .. ".")
 end
