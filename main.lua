@@ -8,7 +8,7 @@ local password
 print("entropygen: the world's worst password generator\n")
 print("how many passwords will you like to generate? (minimum 1)")
 passwordCount = tonumber(io.read())
-print("how many words shall each password generate? (minimum 1)")
+print("how many words shall each password generate? (aim for 5-10)")
 wordCount = tonumber(io.read())
 
 for passwords = 1, passwordCount do
