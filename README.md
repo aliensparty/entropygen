@@ -7,4 +7,5 @@ prereq: install lua ok :)
 3. lua main.lua
 4. expected output: some passwords. for example, base-grand-match-doctor-doubt. a password who can have many characters but is easier to type than random letters and numbers.
 # credits
-Credits: dariusk on github's Corpora: https://github.com/dariusk/corpora. Wordbank uses file https://raw.githubusercontent.com/dariusk/corpora/refs/heads/master/data/words/common.json
+nouns and adjectives: hugsy's "stuff" repo. https://github.com/hugsy/stuff/blob/main/random-word/
+verbs and adverbs: david47k's "top-english-wordlists" repo. https://github.com/david47k/top-english-wordlists
